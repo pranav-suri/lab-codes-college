@@ -30,10 +30,14 @@ void mid_node(struct Node *head, int data, int index)
     struct Node *new_node = create_node(data);
     struct Node *current = head;
     int pos = 0;
-    if (index == 0){
+    if (index == 0)
+    {
         start_node(&head, data);
-    } else{
-        while (pos != index - 1){
+    }
+    else
+    {
+        while (pos != index - 1)
+        {
             current = current->next;
             pos++;
         }
@@ -92,22 +96,27 @@ void del_mid(struct Node *head, int index)
     }
 }
 
-void remove_duplicates(struct Node *head){
+void remove_duplicates(struct Node *head)
+{
     struct Node *current = head;
-    
-    while (current != NULL) {
+
+    while (current != NULL)
+    {
         struct Node *p = current;
-        
-        while (p->next != NULL) { 
-            if (current->data == p->next->data) {
+
+        while (p->next != NULL)
+        {
+            if (current->data == p->next->data)
+            {
                 struct Node *temp = p->next;
                 p->next = p->next->next;
                 free(temp);
-            } else {
+            }
+            else
+            {
                 p = p->next;
             }
         }
-        
         current = current->next;
     }
 }
@@ -142,12 +151,14 @@ void remove_duplicates(struct Node *head){
 }
 */
 
-void reverse(struct Node **head){
-    struct Node* p = *head;
-    struct Node* q = NULL;
-    struct Node* r = p->next;
+void reverse(struct Node **head)
+{
+    struct Node *p = *head;
+    struct Node *q = NULL;
+    struct Node *r = p->next;
 
-    while(p != NULL){
+    while (p != NULL)
+    {
         r = p->next;
         p->next = q;
         q = p;
@@ -182,32 +193,39 @@ void reverse(struct Node **head){
 }
 */
 
-void concat(struct Node *head1, struct Node *head2){
+void concat(struct Node *head1, struct Node *head2)
+{
     struct Node *curr1 = head1;
-    while (curr1->next != NULL){
+    while (curr1->next != NULL)
+    {
         curr1 = curr1->next;
     }
     curr1->next = head2;
 }
 
-void union_ll(struct Node *head1, struct Node *head2){
+void union_ll(struct Node *head1, struct Node *head2)
+{
     concat(head1, head2);
     remove_duplicates(head1);
 }
 
-void intersection(struct Node *head1, struct Node *head2) {
+void intersection(struct Node *head1, struct Node *head2)
+{
     remove_duplicates(head1);
     remove_duplicates(head2);
 
     struct Node *curr1, *curr2;
     curr1 = head1;
     curr2 = head2;
-    while (curr1 != NULL) {
+    while (curr1 != NULL)
+    {
         curr2 = head2;
-        while (curr2 != NULL) {
-            if (curr1->data == curr2->data) {
-            printf("%d ", curr1->data);
-            break;
+        while (curr2 != NULL)
+        {
+            if (curr1->data == curr2->data)
+            {
+                printf("%d ", curr1->data);
+                break;
             }
             curr2 = curr2->next;
         }
@@ -215,21 +233,27 @@ void intersection(struct Node *head1, struct Node *head2) {
     }
 }
 
-void display_list(struct Node *head){
+void display_list(struct Node *head)
+{
     struct Node *current = head;
-    while (current != NULL) {
+    while (current != NULL)
+    {
         printf("%d\n", current->data);
         current = current->next;
     }
 }
 
-void bub_sort(struct Node *head){
+void bub_sort(struct Node *head)
+{
     struct Node *i = head;
     struct Node *j;
-    while(i != NULL) {
+    while (i != NULL)
+    {
         j = i;
-        while (j != NULL){
-            if (j->data < i->data){
+        while (j != NULL)
+        {
+            if (j->data < i->data)
+            {
                 int temp = j->data;
                 j->data = i->data;
                 i->data = temp;

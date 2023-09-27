@@ -1,44 +1,75 @@
 #include <stdio.h>
 
-// Assuming array is sorted
-
-int bin_itr(int arr[], int len, int key){
-    int l = 0, h = len - 1;
-    int imid = (l+h)/2;
-    while (l>h){
-        if (arr[imid] == key){
+int bin_search_recursive(int arr[], int key, int ilow, int ihigh)
+{
+    if (ihigh >= ilow)
+    {
+        int imid = (ihigh + ilow) / 2;
+        if (key > arr[imid])
+        {
+            int ilow = imid + 1;
+            return bin_search_recursive(arr, key, ilow, ihigh);
+        }
+        else if (key < arr[imid])
+        {
+            int ihigh = imid - 1;
+            return bin_search_recursive(arr, key, ilow, ihigh);
+        }
+        if (key == arr[imid])
+        {
             return imid;
-        }
-        else if (arr[imid] > key){
-            h = imid - 1;
-        }
-        else{
-            l = imid + 1;
         }
     }
     return -1;
 }
 
-int bin_rec(int arr[], int l, int h,int key){ 
-    if (l>h){
-        int imid = (l+h)/2;
-        if (arr[imid] == key){
+int bin_search_iterative(int arr[], int key, int ilow, int ihigh)
+{
+    int imid;
+    do
+    {
+        imid = (ilow + ihigh) / 2;
+
+        if (key > arr[imid])
+        {
+            ilow = imid + 1;
+        }
+        else if (key < arr[imid])
+        {
+            ihigh = imid - 1;
+        }
+
+        if (key == arr[imid])
+        {
             return imid;
         }
-        else if (arr[imid] > key){
-            return bin_rec(arr, l, imid-1, key);
-        }
-        else{
-            return bin_rec(arr, imid+1, h, key);
-        }
-    }
+    } while (ihigh >= ilow);
     return -1;
 }
 
-int main(){
-    int len = 10;
-    int arr[10] = {10,9,8,7,6,5,4,3,2,1};
-    int len = 10;
-    print_arr(arr, len);
+int main()
+{
+    int arr[] = {2, 4, 8, 16, 23, 56, 78, 89};
+    int len = sizeof(arr) / sizeof(arr[0]);
+    int key = 23; // Element to be searched
+    int ihigh = len, ilow = 0;
+
+    int iIter = bin_search_iterative(arr, key, ilow, ihigh);
+    int iRecur = bin_search_recursive(arr, key, ilow, ihigh);
+
+    if (iIter != -1)
+    {
+        printf("Using Recursion: Element at index: %d\n", iRecur);
+    }
+
+    if (iRecur != -1)
+    {
+        printf("Using Iteration: Element at index: %d\n", iIter);
+    }
+
+    else
+    {
+        printf("Element not found.");
+    }
     return 0;
 }
