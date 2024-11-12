@@ -15,16 +15,15 @@ vector<int> dijkstra(int source, int n, const vector<vector<pii>>& graph) {
         int d = pq.top().first;   // distance from source
         pq.pop();
 
-        // If the distance in pq is not the least, skip it
         if (d > dist[u]) continue;
 
         for (const auto& edge : graph[u]) {
-            int v = edge.second;      // Neighbor node
-            int weight = edge.first;  // Edge weight
+            int v = edge.second;      // neighbour
+            int weight = edge.first;  // weight
 
             if (dist[u] + weight < dist[v]) {
                 dist[v] = dist[u] + weight;
-                pq.push({dist[v], v});  // Push updated distance and node into pq
+                pq.push({dist[v], v}); 
             }
         }
     }
